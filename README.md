@@ -1,18 +1,44 @@
-#### Supspider 超级蜘蛛
-
-为何要使用Supspider,因为Supspider结合了优秀网络框架的优点,使得这个库更加方便以及简单
-
-例如:
-
-- req = supspider.GetPage('https://y.qq.com/').get_div(',').save('div.html')
-  在这里使用了supspider库里面的GetPage,直接获取了页面里面的所有div信息,并且保存在了一个名字叫div.html的文件中
-
-- 在这里面还内置了header请求头部,即使在你没有特殊要求的情况下也可以直接获取到页面
+### Supspider 超级蜘蛛
 
 ---
 
-- GetPage(url,header) 发起请求
-- get_html() 获取整个html页面
-- get_body() 获取整个body元素
-- get_div(sep) 获取所有div元素
-- save(filename,encoding)保存文件
+##### 1. 为何使用?
+
+- 结合了优秀网络库以及原生Python的操作,让实现效果的代码更加简短
+
+##### 2. 有何特点?
+
+- 2.1. 降低学习成本,更快上手,更加简单
+- 2.2. 让爬虫程序更加简单再简单
+- 2.3. 语法简短,更优雅的编码风格
+
+阶段: 完善中,欢迎参与开发
+
+目前提供的方法:
+
+- 1.1. get
+- 1.2. post
+
+API:
+
+请求方法:
+<br>
+Obtain(url,method,dp(data or params),headers(默认拥有简单的请求头))
+
+- doc() 获取整个html文档
+- edoc(path,index,encoding) 获取指定标签, path: 标签路径用法和Xpath一致, index: 标签索引(默认为None), encoding: 编码(
+  默认为utf-8)
+- json() 获取json数据
+
+写入:
+<br>
+W(content, filename, mode(默认为'w'写入模式), encoding(默认为utf-8))
+
+开始使用:
+```python
+import supspider as sp
+
+# 获取博客的body,并写入body.html
+rep = sp.Obtain("http://www.lyonjohn.xyz", "GET").edoc("/html/body")
+print(rep)
+sp.W(rep, "body.html")
